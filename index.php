@@ -307,7 +307,7 @@
             </div>
         </div>
         <hr>
-test
+
         <?php } ?>
 
 <?php

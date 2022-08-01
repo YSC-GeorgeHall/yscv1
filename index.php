@@ -306,7 +306,7 @@
                 </div>
             </div>
         </div>
-        <hr>test
+        <hr>
 
         <?php } ?>
 

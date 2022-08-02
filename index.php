@@ -86,7 +86,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Dashboard Template · Bootstrap v5.2</title>
+        <title>Your Shopping Centre</title>
         <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
         <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -128,67 +128,79 @@
                                     <h5>What are you shopping for?</h5>
                                 </div>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">
+                                    <a class="nav-link active" aria-current="page" href="index.php">
                                     <span data-feather="home" class="align-text-bottom"></span>
                                     Browsing - View All Stores
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="childrenswear.php">
+                                    <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                                    Baby & Children
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="booksandstationary.php">
                                     <span data-feather="file" class="align-text-bottom"></span>
                                     Books & Stationary
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                    <span data-feather="shopping-cart" class="align-text-bottom"></span>
-                                    Childrenwear
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="foodanddrink.php">
                                     <span data-feather="users" class="align-text-bottom"></span>
                                     Food & Drink
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="gifts.php">
+                                    <span data-feather="bar-chart-2" class="align-text-bottom"></span>
+                                    Gifts
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="healthandbeauty.php">
                                     <span data-feather="bar-chart-2" class="align-text-bottom"></span>
                                     Health & Beauty
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="homewear.php">
                                     <span data-feather="layers" class="align-text-bottom"></span>
                                     Homewear
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="jewellery.php">
                                     <span data-feather="layers" class="align-text-bottom"></span>
                                     Jewellery
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="menswear.php">
                                     <span data-feather="layers" class="align-text-bottom"></span>
                                     Menswear
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="technology.php">
+                                    <span data-feather="layers" class="align-text-bottom"></span>
+                                    Pets
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="technology.php">
                                     <span data-feather="layers" class="align-text-bottom"></span>
                                     Technology
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="travel.php">
                                     <span data-feather="layers" class="align-text-bottom"></span>
                                     Travel
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="womenswear.php">
                                     <span data-feather="layers" class="align-text-bottom"></span>
                                     Womenswear
                                     </a>
@@ -237,6 +249,7 @@
                                 </li>
                                 <?php } ?>
                             </ul>
+
                         </div>
                     </nav>
                 </div>
@@ -313,6 +326,7 @@
 <?php
 require_once "selectallads.php";
 ?>
+
 
 
             </div>

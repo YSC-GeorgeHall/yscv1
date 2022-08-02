@@ -2,7 +2,7 @@
 require_once "config.php";
 
 
-$sql = "SELECT advertiser_URL, advertiser_logo  FROM advertisers ORDER BY advertiser_name ASC ";
+$sql = "SELECT advertiser_URL, advertiser_logo FROM advertisers WHERE advertiser_Category = 'Books & Stationary' ORDER BY advertiser_name ASC ";
 if ($result = mysqli_query($link, $sql))
 {
     if (mysqli_num_rows($result) > 0)

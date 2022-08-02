@@ -311,7 +311,7 @@
         <?php } ?>
 
 <?php
-require_once "selectonead.php";
+require_once "selectallads.php";
 ?>
 
 

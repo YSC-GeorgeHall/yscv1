@@ -141,67 +141,67 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="booksandstationary.php">
-                                    <span data-feather="file" class="align-text-bottom"></span>
+                                    <span data-feather="book-open" class="align-text-bottom"></span>
                                     Books & Stationary
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="foodanddrink.php">
-                                    <span data-feather="users" class="align-text-bottom"></span>
+                                    <span data-feather="coffee" class="align-text-bottom"></span>
                                     Food & Drink
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="gifts.php">
-                                    <span data-feather="bar-chart-2" class="align-text-bottom"></span>
+                                    <span data-feather="gift" class="align-text-bottom"></span>
                                     Gifts
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="healthandbeauty.php">
-                                    <span data-feather="bar-chart-2" class="align-text-bottom"></span>
+                                    <span data-feather="heart" class="align-text-bottom"></span>
                                     Health & Beauty
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="homewear.php">
-                                    <span data-feather="layers" class="align-text-bottom"></span>
+                                    <span data-feather="home" class="align-text-bottom"></span>
                                     Homewear
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="jewellery.php">
-                                    <span data-feather="layers" class="align-text-bottom"></span>
+                                    <span data-feather="shopping-bag" class="align-text-bottom"></span>
                                     Jewellery
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="menswear.php">
-                                    <span data-feather="layers" class="align-text-bottom"></span>
+                                    <span data-feather="shopping-bag" class="align-text-bottom"></span>
                                     Menswear
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="technology.php">
-                                    <span data-feather="layers" class="align-text-bottom"></span>
+                                    <a class="nav-link" href="pets.php">
+                                    <span data-feather="shopping-bag" class="align-text-bottom"></span>
                                     Pets
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="technology.php">
-                                    <span data-feather="layers" class="align-text-bottom"></span>
+                                    <span data-feather="cpu" class="align-text-bottom"></span>
                                     Technology
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="travel.php">
-                                    <span data-feather="layers" class="align-text-bottom"></span>
+                                    <span data-feather="globe" class="align-text-bottom"></span>
                                     Travel
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="womenswear.php">
-                                    <span data-feather="layers" class="align-text-bottom"></span>
+                                    <span data-feather="shopping-bag" class="align-text-bottom"></span>
                                     Womenswear
                                     </a>
                                 </li>
@@ -224,26 +224,26 @@
                                     ?>
                                 <li class="nav-item">
                                     <a class="nav-link" href="view-profile.php">
-                                    <span data-feather="file-text" class="align-text-bottom"></span>
+                                    <span data-feather="user" class="align-text-bottom"></span>
                                     View Your Profile
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="view-fav.php">
-                                    <span data-feather="file-text" class="align-text-bottom"></span>
+                                    <span data-feather="star" class="align-text-bottom"></span>
                                     View Your Favourites
                                     </a>
                                 </li>
           <li class="nav-item">
             <a class="nav-link"  href="reset-password.php">
-              <span data-feather="file-text" class="align-text-bottom"></span>
+              <span data-feather="refesh-cw" class="align-text-bottom"></span>
               Reset Your Password
             </a>
           </li>
                                 <?php }else{ ?>
                                 <li class="nav-item">
                                     <a class="nav-link" href="register.php">
-                                    <span data-feather="file-text" class="align-text-bottom"></span>
+                                    <span data-feather="user" class="align-text-bottom"></span>
                                     Register
                                     </a>
                                 </li>

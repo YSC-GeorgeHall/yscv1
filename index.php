@@ -320,7 +320,7 @@
         <hr>
 
         <?php } ?>
-test
+
 <?php
 require_once "selectallads.php";
 ?>

@@ -257,13 +257,14 @@
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"  >
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="https://via.placeholder.com/728x120.png?text=Image1" class="d-block w-100" alt="...">
+                    <img src="images/ysc.jpg" class="d-block w-100" alt="..." style="height: 300px;">
+                        
                     </div>
                     <div class="carousel-item">
-                        <img src="https://via.placeholder.com/728x120.png?text=Image2" class="d-block w-100" alt="...">
+                        <img src="images/dl20off.jpg" class="d-block w-100" alt="..." style="height: 300px;">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://via.placeholder.com/728x120.png?text=Image3" class="d-block w-100" alt="...">
+                        <img src="https://via.placeholder.com/728x120.png?text=Image3" class="d-block w-100" alt="..." style="height: 300px;">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">

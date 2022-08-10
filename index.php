@@ -134,7 +134,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="childrenswear.php">
+                                    <a class="nav-link" href="babyandchildren.php">
                                     <span data-feather="shopping-cart" class="align-text-bottom"></span>
                                     Baby & Children
                                     </a>

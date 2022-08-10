@@ -232,13 +232,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <a class="nav-link" href="register.php">
+            <a class="nav-link active" aria-current="page" href="register.php">
               <span data-feather="file-text" class="align-text-bottom"></span>
               Register
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="login.php">
+            <a class="nav-link" href="index.php">
               <span data-feather="file-text" class="align-text-bottom"></span>
               Log In
             </a>

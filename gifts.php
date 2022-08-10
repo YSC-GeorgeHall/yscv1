@@ -1,120 +1,111 @@
 <?php
-// Initialize the session
-session_start();
- 
-// Check if the user is logged in, otherwise redirect to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
-}
- 
-// Include config file
-require_once "config.php";
- 
-// Define variables and initialize with empty values
-$new_password = $confirm_password = "";
-$new_password_err = $confirm_password_err = "";
- 
-// Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-    // Validate new password
-    if(empty(trim($_POST["new_password"]))){
-        $new_password_err = "Please enter the new password.";     
-    } elseif(strlen(trim($_POST["new_password"])) < 6){
-        $new_password_err = "Password must have atleast 6 characters.";
-    } else{
-        $new_password = trim($_POST["new_password"]);
-    }
+    // Initialize the session
+    session_start();
+     
     
-    // Validate confirm password
-    if(empty(trim($_POST["confirm_password"]))){
-        $confirm_password_err = "Please confirm the password.";
-    } else{
-        $confirm_password = trim($_POST["confirm_password"]);
-        if(empty($new_password_err) && ($new_password != $confirm_password)){
-            $confirm_password_err = "Password did not match.";
+     
+    // Include config file
+    require_once "config.php";
+     
+    // Define variables and initialize with empty values
+    $username = $password = "";
+    $username_err = $password_err = $login_err = "";
+     
+    // Processing form data when form is submitted
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+     
+        // Check if username is empty
+        if(empty(trim($_POST["username"]))){
+            $username_err = "Please enter username.";
+        } else{
+            $username = trim($_POST["username"]);
         }
-    }
         
-    // Check input errors before updating the database
-    if(empty($new_password_err) && empty($confirm_password_err)){
-        // Prepare an update statement
-        $sql = "UPDATE users SET password = ? WHERE id = ?";
+        // Check if password is empty
+        if(empty(trim($_POST["password"]))){
+            $password_err = "Please enter your password.";
+        } else{
+            $password = trim($_POST["password"]);
+        }
         
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "si", $param_password, $param_id);
+        // Validate credentials
+        if(empty($username_err) && empty($password_err)){
+            // Prepare a select statement
+            $sql = "SELECT id, username, password FROM users WHERE username = ?";
             
-            // Set parameters
-            $param_password = password_hash($new_password, PASSWORD_DEFAULT);
-            $param_id = $_SESSION["id"];
-            
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Password updated successfully. Destroy the session, and redirect to login page
-                session_destroy();
-                header("location: login.php");
-                exit();
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
+            if($stmt = mysqli_prepare($link, $sql)){
+                // Bind variables to the prepared statement as parameters
+                mysqli_stmt_bind_param($stmt, "s", $param_username);
+                
+                // Set parameters
+                $param_username = $username;
+                
+                // Attempt to execute the prepared statement
+                if(mysqli_stmt_execute($stmt)){
+                    // Store result
+                    mysqli_stmt_store_result($stmt);
+                    
+                    // Check if username exists, if yes then verify password
+                    if(mysqli_stmt_num_rows($stmt) == 1){                    
+                        // Bind result variables
+                        mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
+                        if(mysqli_stmt_fetch($stmt)){
+                            if(password_verify($password, $hashed_password)){
+                                // Password is correct, so start a new session
+                                
+                                
+                                // Store data in session variables
+                                $_SESSION["loggedin"] = true;
+                                $_SESSION["id"] = $id;
+                                $_SESSION["username"] = $username;                            
+                                
+                                // Redirect user to welcome page
+                                
+                            } else{
+                                // Password is not valid, display a generic error message
+                                $login_err = "Invalid username or password.";
+                            }
+                        }
+                    } else{
+                        // Username doesn't exist, display a generic error message
+                        $login_err = "Invalid username or password.";
+                    }
+                } else{
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
+    
+                // Close statement
+                mysqli_stmt_close($stmt);
             }
-
-            // Close statement
-            mysqli_stmt_close($stmt);
         }
+        
     }
-    
-
-}
-?>
-?>
- 
-<!DOCTYPE html>
+    ?>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body{ font: 14px sans-serif; text-align: center; }
-    </style>
-</head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding: 20px; }
-    </style>
+    <head>
         <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard Template · Bootstrap v5.2</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
-    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style type="text/css">
-      .contentfromsidenav{
-        margin-left: 15%;
-
-      }
-      @media only screen and (max-width:600px) {
-    .contentfromsidenav {
-    width:100%;
-
-  }
-}
-    </style>
-
-    
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
-</head>
-<body>
-<div class="contentfromsidenav">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Your Shopping Centre</title>
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
+        <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <style type="text/css">
+            .contentfromsidenav{
+            margin-left: 15%;
+            }
+            @media only screen and (max-width:600px) {
+            .contentfromsidenav {
+            width:100%;
+            }
+            }
+        </style>
+        <!-- Custom styles for this template -->
+        <link href="dashboard.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="contentfromsidenav">
             <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow" style="margin-left: 1.9%;">
                 <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Your Shopping Centre</a>
                 <?php if( isset($_SESSION['username']) && !empty($_SESSION['username']) )
@@ -137,13 +128,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     <h5>What are you shopping for?</h5>
                                 </div>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="index.php">
+                                    <a class="nav-link" href="index.php">
                                     <span data-feather="home" class="align-text-bottom"></span>
                                     Browsing - View All Stores
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="childrenswear.php">
+                                    <a class="nav-link  " href="babyandchildren.php">
                                     <span data-feather="shopping-cart" class="align-text-bottom"></span>
                                     Baby & Children
                                     </a>
@@ -161,7 +152,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="gifts.php">
+                                    <a class="nav-link active" aria-current="page" href="gifts.php">
                                     <span data-feather="gift" class="align-text-bottom"></span>
                                     Gifts
                                     </a>
@@ -282,36 +273,87 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="visually-hidden">Next</span>
                 </button>
             </div>
-  
-<div class="container" style="padding-left: 5%;">
+            <div class="container" style="padding-left: 5%;">
 
-    <div class="wrapper">
-        <h2>Reset Password</h2>
-        <p>Please fill out this form to reset your password.</p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"> 
-            <div class="form-group">
-                <label>New Password</label>
-                <input type="password" name="new_password" class="form-control <?php echo (!empty($new_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $new_password; ?>">
-                <span class="invalid-feedback"><?php echo $new_password_err; ?></span>
+<?php if( isset($_SESSION['username']) && !empty($_SESSION['username']) )
+                                {
+                                ?>
+<?php }else{ ?>
+        <hr>
+        <div class="row">
+            <!-- Start of Row -->
+            <div class="col-md-12">
+                <!-- Start of Col 4 -->
+                <div class="span12">
+                    <div class="thumbnail center well well-small text-center">
+                        <div class="wrapper">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <h2>Login</h2>
+                                </div>
+                                <div class="col-md-3">
+                                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                                        <div class="form-group">
+                                            <input type="text" name="username" placeholder="Enter Username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
+                                            <span class="invalid-feedback"><?php echo $username_err; ?></span>
+                                        </div>
+                                </div>
+                                <div class="col-md-3">
+                                <div class="form-group">
+                                <input type="password" name="password" placeholder="Enter Password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                                <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                                </div>
+                                </div>
+                                <div class="col-md-3">
+                                <div class="form-group">
+                                <input type="submit" class="btn btn-primary" value="Login">
+                                </div>
+                                <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Confirm Password</label>
-                <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>">
-                <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
+        </div>
+        <hr>
+
+        <?php } ?>
+
+        <?php
+require_once "config.php";
+
+
+$sql = "SELECT advertiser_URL, advertiser_logo FROM advertisers WHERE advertiser_Category = 'Gifts' ORDER BY advertiser_name ASC ";
+if ($result = mysqli_query($link, $sql))
+{
+    if (mysqli_num_rows($result) > 0)
+    {
+        echo "<div class=row>";
+        while ($row = mysqli_fetch_array($result))
+        {   
+            echo "<div class=col-md-4 style='padding: 15px;'><a href= " . $row['advertiser_URL'] . "><img src='data:image/jpeg;base64," . base64_encode($row['advertiser_logo']) . "'/></div>";
+        }
+        echo "</div>";
+    }
+    else
+    {
+        echo "No records matching your query were found.";
+    }
+}
+else
+{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+?>
+
+
+
+
             </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-                <a class="btn btn-link ml-2" href="welcome.php">Cancel</a>
-            </div>
-        </form>
-    </div>  
-
-
-
-
-</div>
-    <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
-
-      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
-  </body>
+        </div>
+        <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+    </body>
 </html>

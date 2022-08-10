@@ -228,15 +228,15 @@
                                     View Your Profile
                                     </a>
                                 </li>
-                                <li class="nav-item">
+<!--                                 <li class="nav-item">
                                     <a class="nav-link" href="view-fav.php">
                                     <span data-feather="star" class="align-text-bottom"></span>
                                     View Your Favourites
                                     </a>
-                                </li>
+                                </li> -->
           <li class="nav-item">
             <a class="nav-link"  href="reset-password.php">
-              <span data-feather="refesh-cw" class="align-text-bottom"></span>
+              <span data-feather="user" class="align-text-bottom"></span>
               Reset Your Password
             </a>
           </li>
@@ -318,7 +318,7 @@
             </div>
         </div>
         <hr>
-test
+
         <?php } ?>
 
 <?php

@@ -339,7 +339,7 @@ if ($result = mysqli_query($link, $sql))
     }
     else
     {
-        echo "No records matching your query were found.";
+        echo "Sorry! We dont have any retailers for this category yet, check back soon, or register for updates!";
     }
 }
 else

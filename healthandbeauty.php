@@ -134,7 +134,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link  active" aria-current="page" href="babyandchildren.php">
+                                    <a class="nav-link " href="babyandchildren.php">
                                     <span data-feather="shopping-cart" class="align-text-bottom"></span>
                                     Baby & Children
                                     </a>
@@ -158,7 +158,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="healthandbeauty.php">
+                                    <a class="nav-link  active" aria-current="page" href="healthandbeauty.php">
                                     <span data-feather="heart" class="align-text-bottom"></span>
                                     Health & Beauty
                                     </a>
